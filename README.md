@@ -5,17 +5,17 @@
 
 **Objetivo**: 
 
-Prácticar el manejo de datos en línea en la plataforma Android con Kotlin mediante la utilización de bibliotecas, considerando su formato y su correspondiente procesamiento en una aplicación. Adicionalmente, aprenderá a crear sus propios servicios de prueba con algunas herramientas Web disponibles para su consumo.
+Practicar el manejo de datos en línea en la plataforma Android con Kotlin mediante la utilización de bibliotecas, considerando su formato y su correspondiente procesamiento en una aplicación. Adicionalmente, aprenderá a crear sus propios servicios de prueba con algunas herramientas Web disponibles para su consumo.
 
 ![Mokup appnimal movil](https://idel.com.mx/dadm/mokup.jpg)  
 
 **Características**:
 * Splash screen al entrar a la aplicación en donde aparece el logo, la versión y el creador de la aplicación por alrededor de 3 segundos. `OK`
 * Creación de un API mediante la herramienta Web apiary ([apiary.io](https://apiary.io/)) con sus endpoints para consumir y mostrar un catálogo de elementos y sus detalles. `OK`
-* Listado principal contiene una imagen por cada elemento usando url’s. `OK`
+* El listado principal contiene una imagen por cada elemento usando url’s. `OK`
 * El tipo de elementos (libre elección), con detalles y una cantidad mínima de detalles o atributos de 6. `OK`
 * La interfaz adecuada al tipo de aplicación y su temática. `OK`
-* En la pantalla principal muestra el listado de elementos y al seleccionar alguno de ellos se visualiza sus detalles. `OK`
+* En la pantalla principal muestra el listado de elementos y al seleccionar alguno de ellos se visualizan sus detalles. `OK`
 
 ***
 ## **API de datos mock**
@@ -84,5 +84,5 @@ Respuesta - estructura json esperada
 >Desarrollo de Aplicaciones para Dispositivos Móviles  
 9ª emisión  
   
->Modulo: Desarrollo avanzado de aplicaciones para Android  
+>Módulo: Desarrollo avanzado de aplicaciones para Android  
 Enero de 2023 - Version 1.0.
