@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navgrap"
+    app:startDestination="@id/listAnimalsFragment">
+
+    <fragment
+        android:id="@+id/listAnimalsFragment"
+        android:name="mx.com.idel.showanimaldadm.view.fragment.ListAnimalsFragment"
+        android:label="fragment_list_animals"
+        tools:layout="@layout/fragment_list_animals" >
+        <action
+            android:id="@+id/action_listAnimalsFragment_to_detallAnimalFragment"
+            app:destination="@id/detallAnimalFragment" />
+        <action
+            android:id="@+id/action_listAnimalsFragment_to_perfilConfigFragment"
+            app:destination="@id/perfilConfigFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detallAnimalFragment"
+        android:name="mx.com.idel.showanimaldadm.view.fragment.DetallAnimalFragment"
+        android:label="fragment_detall_animal"
+        tools:layout="@layout/fragment_detall_animal" >
+        <argument
+            android:name="animal"
+            app:argType="mx.com.idel.showanimaldadm.model.entities.AnimalModel" />
+        <action
+            android:id="@+id/action_detallAnimalFragment_to_perfilConfigFragment"
+            app:destination="@id/perfilConfigFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/perfilConfigFragment"
+        android:name="mx.com.idel.showanimaldadm.view.fragment.PerfilConfigFragment"
+        android:label="fragment_perfil_config"
+        tools:layout="@layout/fragment_perfil_config" />
+</navigation>

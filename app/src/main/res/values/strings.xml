@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">appnimal</string>
+    <string name="cuser_nombre">Nombre de usuario</string>
+    <string name="cuser_imagen">Avatar (url)</string>
+    <string name="nombre">Nombre</string>
+    <string name="bienvenido">Bienvenido a appnimal</string>
+    <string name="sindatos">Sin datos</string>
+    <string name="enfermo">¿Está enfermo?</string>
+    <string name="dueno">Dueño</string>
+    <string name="descripcion">Descripción</string>
+    <string name="peso">Peso (kg)</string>
+    <string name="imagen">Imagen</string>
+    <string name="detalle">Nombre de animal</string>
+    <string name="genero">Genero</string>
+    <string name="macho">Macho</string>
+    <string name="hembra">Hembra</string>
+    <string name="creditos">Créditos</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="creditos_inicio">Elaborado por:\nIdelfonso De la Cruz Hernández\n\nVersion 1.0.</string>
+    <string name="creditos_datos">Elaborado por:\nIdelfonso De la Cruz Hernández\n\nDesarrollo de Aplicaciones para Dispositivos Móviles\n9ª emisión\n\nModulo: Desarrollo avanzado de aplicaciones para Android\n\nEnero de 2023 - Version 1.0.</string>
+    <string name="error_dataUser">Se obtuvo usuario defaul: %s</string>
+    <string name="error_dataAnimal">No se pudo obtener detalle de animal: %s</string>
+    <string name="regresar">regresar</string>
+</resources>

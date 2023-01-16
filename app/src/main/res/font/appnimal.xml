@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <font
+        android:font="@font/light2"
+        android:fontStyle="normal"
+        android:fontWeight="100"
+        app:font="@font/light2"
+        app:fontStyle="normal"
+        app:fontWeight="100" />
+    <font
+        android:font="@font/light"
+        android:fontStyle="normal"
+        android:fontWeight="200"
+        app:font="@font/light"
+        app:fontStyle="normal"
+        app:fontWeight="200" />
+
+    <font
+        android:font="@font/regular"
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        app:font="@font/regular"
+        app:fontStyle="normal"
+        app:fontWeight="400" />
+    <font
+        android:font="@font/medium"
+        android:fontStyle="normal"
+        android:fontWeight="500"
+        app:font="@font/medium"
+        app:fontStyle="normal"
+        app:fontWeight="500" />
+    <font
+        android:font="@font/bold"
+        android:fontStyle="normal"
+        android:fontWeight="700"
+        app:font="@font/bold"
+        app:fontStyle="normal"
+        app:fontWeight="700" />
+    <font
+        android:font="@font/bold2"
+        android:fontStyle="normal"
+        android:fontWeight="800"
+        app:font="@font/bold2"
+        app:fontStyle="normal"
+        app:fontWeight="800" />
+    <font
+        android:font="@font/bold3"
+        android:fontStyle="normal"
+        android:fontWeight="900"
+        app:font="@font/bold3"
+        app:fontStyle="normal"
+        app:fontWeight="900" />
+    <!--ITALIC-->
+    <font
+        android:font="@font/italight2"
+        android:fontStyle="italic"
+        android:fontWeight="100"
+        app:font="@font/italight2"
+        app:fontStyle="italic"
+        app:fontWeight="100" />
+    <font
+        android:font="@font/italight"
+        android:fontStyle="italic"
+        android:fontWeight="200"
+        app:font="@font/italight"
+        app:fontStyle="italic"
+        app:fontWeight="200" />
+
+    <font
+        android:font="@font/itaregular"
+        android:fontStyle="italic"
+        android:fontWeight="400"
+        app:font="@font/itaregular"
+        app:fontStyle="italic"
+        app:fontWeight="400" />
+    <font
+        android:font="@font/itamedium"
+        android:fontStyle="italic"
+        android:fontWeight="500"
+        app:font="@font/itamedium"
+        app:fontStyle="italic"
+        app:fontWeight="500" />
+    <font
+        android:font="@font/itabold"
+        android:fontStyle="italic"
+        android:fontWeight="700"
+        app:font="@font/itabold"
+        app:fontStyle="italic"
+        app:fontWeight="700" />
+    <font
+        android:font="@font/itabold2"
+        android:fontStyle="italic"
+        android:fontWeight="800"
+        app:font="@font/itabold2"
+        app:fontStyle="italic"
+        app:fontWeight="800" />
+    <font
+        android:font="@font/itabold3"
+        android:fontStyle="italic"
+        android:fontWeight="900"
+        app:font="@font/itabold3"
+        app:fontStyle="italic"
+        app:fontWeight="900" />
+</font-family>
