@@ -61,6 +61,10 @@ class LoadingApp : AppCompatActivity() {
                     getString(R.string.error_dataUser,usuarioData.id.toString()),
                     Toast.LENGTH_SHORT
                 ).show()
+                val vistaMainActivity = Intent(this@LoadingApp, MainActivity::class.java)
+                startActivity(vistaMainActivity)
+                finish()
+                overridePendingTransition(0, R.drawable.fade_screen)
             }
         }
         startViewModel.getDataUser(Constantes.KEY_ID_USER,)
