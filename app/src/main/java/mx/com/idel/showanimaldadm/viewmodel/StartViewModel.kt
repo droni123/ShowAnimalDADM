@@ -12,6 +12,7 @@ import mx.com.idel.showanimaldadm.Constantes
 import mx.com.idel.showanimaldadm.model.entities.AnimalModelDetall
 import mx.com.idel.showanimaldadm.model.entities.UserPerfil
 import mx.com.idel.showanimaldadm.model.repository.DataApi
+import mx.com.idel.showanimaldadm.model.repository.RetrofitService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,8 +25,8 @@ class StartViewModel:ViewModel() {
     fun getDataUser(id: Int){
         Handler(Looper.getMainLooper()).postDelayed({
             CoroutineScope(Dispatchers.IO).launch {
-                val call = Constantes
-                    .retrofint()
+                val call = RetrofitService
+                    .getRetrofit()
                     .create(DataApi::class.java)
                     .getUserData(id)
                 call.enqueue(

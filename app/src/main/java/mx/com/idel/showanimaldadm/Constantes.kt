@@ -13,14 +13,7 @@ object Constantes {
     const val NAME_FRAGMENT_LIST = "fragment_list_animals"
     const val NAME_FRAGMENT_DETAIL = "fragment_detall_animal"
     const val KEY_ID_USER = 1
-
     const val BASE_URL = "https://private-19eea8-idel.apiary-mock.com/"
     const val LOGTAG = "LOGSDRONI"
 
-    fun retrofint(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
 }
