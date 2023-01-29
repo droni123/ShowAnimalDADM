@@ -39,6 +39,9 @@ class PerfilConfigFragment : Fragment() {
         binding.back.setOnClickListener {
             findNavController().navigateUp()
         }
+        binding.cerrarsession.setOnClickListener {
+            startViewModel.cerrarsession()
+        }
         return view
     }
     private fun inicializarConfig(){
@@ -53,31 +56,35 @@ class PerfilConfigFragment : Fragment() {
                     .circleCrop()
                     .into(binding.icono)
                 binding.inputavatar.setText(usuarioData.imagen)
+                binding.inputusermail.setText(usuarioData.email)
                 HiddeoOrShowItems(true)
-                //usuarioData:UserPerfil
-                (activity as MainActivity).printDataUser(usuarioData)
             }else{
                 Toast.makeText(
                     requireContext(),
-                    getString(R.string.error_dataUser,usuarioData.id.toString()),
+                    getText(R.string.se_cerrar_session),
                     Toast.LENGTH_SHORT
                 ).show()
                 binding.back.visibility = View.VISIBLE
                 anima.stop()
             }
+            (activity as MainActivity).printDataUser(usuarioData)
         })
-        startViewModel.getDataUser(Constantes.KEY_ID_USER,)
+        startViewModel.getDataUser()
     }
     private fun HiddeoOrShowItems(show:Boolean = true){
         if(show) {
             binding.nombre.visibility = View.VISIBLE
             binding.avatar.visibility = View.VISIBLE
             binding.back.visibility = View.VISIBLE
+            binding.usermail.visibility = View.VISIBLE
+            binding.cerrarsession.visibility = View.VISIBLE
             anima.stop()
         }else{
             binding.nombre.visibility = View.INVISIBLE
             binding.avatar.visibility = View.INVISIBLE
             binding.back.visibility = View.INVISIBLE
+            binding.usermail.visibility = View.INVISIBLE
+            binding.cerrarsession.visibility = View.INVISIBLE
             anima.start()
         }
     }

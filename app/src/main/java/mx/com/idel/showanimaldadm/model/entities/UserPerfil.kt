@@ -12,4 +12,6 @@ data class UserPerfil(
     var nombre:String? = "Nombre de usuario",
     @SerializedName("imagen")
     var imagen:String? = "https://idel.com.mx/imagenes/info/foto.jpg",
+    @SerializedName("email")
+    var email:String? = "correo@correo.com.mx",
 ): Serializable

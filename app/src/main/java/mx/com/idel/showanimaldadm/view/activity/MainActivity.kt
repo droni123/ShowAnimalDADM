@@ -1,5 +1,7 @@
 package mx.com.idel.showanimaldadm.view.activity
 
+import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -65,6 +67,26 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        startViewModel.verificacion.observe(this){
+            if(!it){
+                MaterialAlertDialogBuilder(this@MainActivity,R.style.MaterialAlertDialog__Center)
+                    .setTitle(getString(R.string.Aviso))
+                    .setMessage(getString(R.string.no_verificado))
+                    .setPositiveButton(getString(R.string.verificar_now), DialogInterface.OnClickListener{_,_->
+                        startViewModel.sendverificaion()
+                    })
+                    .setNegativeButton(getText(R.string.cancelar),null)
+                    .show()
+            }
+        }
+        startViewModel.mensajes.observe(this){textorecibidoo->
+            val textorecibido = textorecibidoo.trim()
+            if(textorecibido.isNotEmpty()){
+                Toast.makeText(this@MainActivity,textorecibido,Toast.LENGTH_SHORT).show()
+            }
+        }
+        startViewModel.checkVerificacion()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -79,25 +101,38 @@ class MainActivity : AppCompatActivity() {
             if(usuarioData.id != 0){
                 printDataUser(usuarioData)
             }else{
-                Toast.makeText(
-                    this,
-                    getString(R.string.error_dataUser,usuarioData.id.toString()),
-                    Toast.LENGTH_SHORT
-                ).show()
+                returnToLogin()
             }
         }
-        startViewModel.getDataUser(Constantes.KEY_ID_USER,)
+        startViewModel.getDataUser()
     }
     fun printDataUser(usuarioData:UserPerfil = UserPerfil()){
-        val spannable = SpannableStringBuilder("${getString(R.string.bienvenido)}:\n${usuarioData.nombre}")
-        spannable.setSpan(StyleSpan(Typeface.BOLD), 13, 16, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
-        spannable.setSpan(StyleSpan(Typeface.BOLD), 22, spannable.length, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
-        binding.nombreusuario.text = spannable
-        Glide.with(this@MainActivity)
-            .load(usuarioData.imagen)
-            .placeholder(R.drawable.load)
-            .centerCrop()
-            .circleCrop()
-            .into(binding.avatar)
+        if(usuarioData.id != 0) {
+            val spannable =
+                SpannableStringBuilder("${getString(R.string.bienvenido)}:\n${usuarioData.nombre}")
+            spannable.setSpan(StyleSpan(Typeface.BOLD), 13, 16, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+            spannable.setSpan(
+                StyleSpan(Typeface.BOLD),
+                22,
+                spannable.length,
+                Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+            )
+            binding.nombreusuario.text = spannable
+            Glide.with(this@MainActivity)
+                .load(usuarioData.imagen)
+                .placeholder(R.drawable.load)
+                .centerCrop()
+                .circleCrop()
+                .into(binding.avatar)
+        }else{
+            returnToLogin()
+        }
+    }
+    fun returnToLogin(){
+        startViewModel.cerrarsession()
+        val vistaMainActivity = Intent(this@MainActivity, Login::class.java)
+        startActivity(vistaMainActivity)
+        finish()
+        overridePendingTransition(0, R.drawable.fade_screen)
     }
 }

@@ -15,6 +15,7 @@
         <item name="android:navigationBarColor">@color/on</item>
         <item name="fontFamily">@font/appnimal</item>
         <item name="android:fontFamily">@font/appnimal</item>
+
     </style>
     <style name="MaterialAlertDialog__Center" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="materialAlertDialogTitlePanelStyle">@style/Title.Panel.Center</item>
@@ -26,4 +27,5 @@
     <style name="Message.Center" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
         <item name="android:gravity">center_horizontal</item>
     </style>
+
 </resources>

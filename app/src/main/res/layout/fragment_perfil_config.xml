@@ -41,6 +41,7 @@
                 android:id="@+id/inputnombre"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:textColor="@color/bb"
                 />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
@@ -64,15 +65,46 @@
                 android:id="@+id/inputavatar"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:textColor="@color/bb"
                 />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usermail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/user_email"
+            android:layout_below="@id/avatar"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:startIconDrawable="@drawable/ic_mail"
+            app:startIconTint="@color/bb"
+            app:boxStrokeColor="@color/bb"
+            android:textColorHint="@color/bb"
+            app:hintTextColor="@color/bb"
+            android:paddingTop="10dp"
+            android:textColor="@color/bb"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/inputusermail"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/bb"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/usermail"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            >
         <Button
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/avatar"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
             app:iconTint="@color/bb"
             app:backgroundTint="@color/oc"
             android:textColor="@color/bb"
@@ -80,5 +112,19 @@
             app:icon="@drawable/ic_back"
             style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
             />
+
+            <Button
+                android:id="@+id/cerrarsession"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:iconTint="@color/bb"
+                app:backgroundTint="@color/oo"
+                android:textColor="@color/bb"
+                android:text="@string/cerrar_session"
+                app:icon="@drawable/ico_stop"
+                android:layout_marginLeft="15dp"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                />
+        </LinearLayout>
 </RelativeLayout>
 </ScrollView>

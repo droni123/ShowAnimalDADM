@@ -22,5 +22,9 @@ data class AnimalModelDetall(
     @SerializedName("enfermo")
     var enfermo:Boolean? = false,
     @SerializedName("descripcion")
-    var descripcion:String? = "Esta es una descripción de ejemplo"
+    var descripcion:String? = "Esta es una descripción de ejemplo",
+    @SerializedName("latitude")
+    var latitude:Double? = 49.935997,
+    @SerializedName("longitude")
+    var longitude:Double? = 40.553506
 ) : Serializable

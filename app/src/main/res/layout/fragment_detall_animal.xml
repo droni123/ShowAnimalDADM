@@ -19,6 +19,7 @@
             android:textAlignment="center"
             android:textColor="@color/bb"
             android:textFontWeight="700"
+            android:textStyle="bold"
             android:textSize="40sp"
             tools:text="@string/detalle" />
         <ImageView
@@ -38,7 +39,7 @@
             android:textAlignment="center"
             android:textColor="@color/bb"
             android:textSize="20sp"
-            tools:text="DUEÑO: PANCHO LOPEZ" />
+            tools:text="@string/dueno" />
         <TextView
             android:id="@+id/pesoAnimal"
             android:layout_width="match_parent"
@@ -97,14 +98,48 @@
             android:textAlignment="center"
             android:textColor="@color/bb"
             android:textSize="20sp"
-            tools:text="DESCRIPCIÓN DEL ANIMAL"
+            tools:text="@string/descripcion"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"/>
+        <TextView
+            android:id="@+id/tituloUbicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/descripcionAnimal"
+            android:layout_marginTop="15dp"
+            android:textAlignment="center"
+            android:textColor="@color/bb"
+            android:textSize="20sp"
+            android:text="@string/ultima_vez_visto_en"
+            android:textStyle="bold"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tituloUbicacion"
+            android:id="@+id/containermap"
+            android:padding="25dp"
+            >
+            <fragment
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+            />
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <Button
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/descripcionAnimal"
+            android:layout_below="@id/containermap"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="25dp"

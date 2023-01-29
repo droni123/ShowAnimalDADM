@@ -2,6 +2,7 @@ package mx.com.idel.showanimaldadm
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.regex.Pattern
 
 /**
  * Creado por De la Cruz Hernández Idelfonso el 14/01/23
@@ -15,5 +16,13 @@ object Constantes {
     const val KEY_ID_USER = 1
     const val BASE_URL = "https://private-19eea8-idel.apiary-mock.com/"
     const val LOGTAG = "LOGSDRONI"
-
+    val EMAIL_ADDRESS_PATTERN = Pattern.compile(
+        "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                "\\@" +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                "(" +
+                "\\." +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                ")+"
+    )
 }
