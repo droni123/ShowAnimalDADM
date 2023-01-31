@@ -62,6 +62,6 @@ class LoadingApp : AppCompatActivity() {
                 overridePendingTransition(0, R.drawable.fade_screen)
             }
         }
-        startViewModel.getDataUser()
+        startViewModel.getDataUser(true)
     }
 }

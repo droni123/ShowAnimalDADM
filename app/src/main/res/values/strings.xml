@@ -4,7 +4,7 @@
     <string name="cuser_imagen">Avatar (url)</string>
     <string name="nombre">Nombre</string>
     <string name="bienvenido">Bienvenido a appnimal</string>
-    <string name="sindatos">Sin datos</string>
+    <string name="sindatos">Sin datos o sin conexión</string>
     <string name="enfermo">¿Está enfermo?</string>
     <string name="dueno">Dueño</string>
     <string name="descripcion">Descripción</string>

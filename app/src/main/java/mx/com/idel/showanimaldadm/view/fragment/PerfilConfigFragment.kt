@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import mx.com.idel.showanimaldadm.Constantes
 import mx.com.idel.showanimaldadm.R
 import mx.com.idel.showanimaldadm.databinding.FragmentPerfilConfigBinding
 import mx.com.idel.showanimaldadm.view.activity.MainActivity
@@ -69,7 +68,7 @@ class PerfilConfigFragment : Fragment() {
             }
             (activity as MainActivity).printDataUser(usuarioData)
         })
-        startViewModel.getDataUser()
+        startViewModel.usuarioPostValue( (activity as MainActivity).returnDataUser() )
     }
     private fun HiddeoOrShowItems(show:Boolean = true){
         if(show) {

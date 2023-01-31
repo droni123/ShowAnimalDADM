@@ -1,9 +1,14 @@
 package mx.com.idel.showanimaldadm.viewmodel
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,7 +22,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import mx.com.idel.showanimaldadm.App
 import mx.com.idel.showanimaldadm.Constantes
-import mx.com.idel.showanimaldadm.Constantes.LOGTAG
 import mx.com.idel.showanimaldadm.R
 import mx.com.idel.showanimaldadm.model.entities.UserPerfil
 import mx.com.idel.showanimaldadm.model.repository.DataApi
@@ -32,6 +36,7 @@ import retrofit2.Response
 
 class StartViewModel:ViewModel() {
     val usuario = MutableLiveData<UserPerfil>()
+    private var usuario_interno:UserPerfil = UserPerfil()
     val ocultar = MutableLiveData<Boolean>()
     val mensajes = MutableLiveData<String>()
     val focus = MutableLiveData<Int>()
@@ -39,19 +44,45 @@ class StartViewModel:ViewModel() {
     //Para Firebase
     private var firebaseAuth:FirebaseAuth? = null
     private var userAuth: FirebaseUser? = null
-
+    //val bandera
+    private var con_internet = true
+    private var esperando_actualizar_usuario = false
     init {
         firebaseAuth = FirebaseAuth.getInstance()
+
+        val connectivityManager = App.instance.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        connectivityManager?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                it.registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {
+                    override fun onAvailable(network: Network) {
+                        if(!con_internet){
+                            Toast.makeText(App.instance,"REGRESO INTERNET", Toast.LENGTH_SHORT).show()
+                            con_internet = true
+                            if(esperando_actualizar_usuario){
+                                getDataUser()
+                                esperando_actualizar_usuario = false
+                            }
+                        }
+                    }
+                    override fun onLost(network: Network) {
+                        con_internet = false
+                        Toast.makeText(App.instance,"SIN CONEXION", Toast.LENGTH_SHORT).show()
+                    }
+                })
+            }
+        }
     }
-    fun getDataUser(){
+    fun getDataUser(start:Boolean = false){
+        var tiempo = Constantes.KEY_TIEMPO_DE_ESPERA
+        if(start){ tiempo = Constantes.KEY_TIEMPO_DE_ESPERA_STAR  }
         Handler(Looper.getMainLooper()).postDelayed({
             userAuth = firebaseAuth?.currentUser
             userAuth?.let {
                 SendDataUserToView(it)
             } ?: kotlin.run {
-                usuario.postValue( UserPerfil() )
+                usuarioPostValue( UserPerfil() )
             }
-        },Constantes.KEY_TIEMPO_DE_ESPERA_STAR)
+        },tiempo)
     }
     fun loginUser(email:String,contrasenia:String){
         ocultar.postValue(true)
@@ -116,7 +147,7 @@ class StartViewModel:ViewModel() {
         } else {
             verificacion.postValue(true)
         }
-    }//cortesalfonso12@gmail.com
+    }
     fun sendverificaion(){
         userAuth = firebaseAuth?.currentUser
         userAuth.let {
@@ -132,7 +163,7 @@ class StartViewModel:ViewModel() {
     fun cerrarsession(){
         firebaseAuth?.currentUser?.let {
             firebaseAuth?.signOut()
-            usuario.postValue( UserPerfil() )
+            usuarioPostValue( UserPerfil() )
         }
     }
     private fun manejaErrores(task: Task<AuthResult>){
@@ -178,7 +209,8 @@ class StartViewModel:ViewModel() {
     }
     @SuppressLint("SuspiciousIndentation")
     private fun SendDataUserToView(user: FirebaseUser?){
-        val id_user_random = (1..5).random()
+        var id_user_random = (1..5).random()
+        if(usuario_interno.id != 0){ id_user_random = usuario_interno.id ?: id_user_random }
         viewModelScope.launch {
             val call = RetrofitService
                 .getRetrofit()
@@ -190,33 +222,40 @@ class StartViewModel:ViewModel() {
                             call: Call<UserPerfil>,
                             response: Response<UserPerfil>
                         ) {
-                            var usertosend = UserPerfil(1)
+                            var usertosend = UserPerfil(1,email = user?.email)
                             try {
                                 if(response.code() == 200){
                                     usertosend = response.body() ?: UserPerfil()
                                     usertosend.email = user?.email
-                                    usuario.postValue( usertosend )
+                                    usuarioPostValue( usertosend )
                                 }else{
                                     mensajes.postValue( App.instance.getString(R.string.ERROR_DATOS_USER_API,response.code().toString()) )
-                                    usertosend.email = user?.email
-                                    usuario.postValue( usertosend )
+                                    usuarioPostValue( usertosend )
                                 }
                             }catch (ex:Exception){
                                 Log.e(Constantes.LOGTAG,App.instance.getString(R.string.ERROR_DATOS_USER_API, ex.toString()))
-                                usertosend.email = user?.email
-                                usuario.postValue( usertosend )
+                                usuarioPostValue( usertosend )
                             }
                             ocultar.postValue(false)
                         }
                         override fun onFailure(call: Call<UserPerfil>, t: Throwable) {
                             Log.d(Constantes.LOGTAG, App.instance.getString(R.string.ERROR_SERVER_API,t.message))
-                            val usertosend = UserPerfil()
-                            usertosend.email = user?.email
-                            usuario.postValue( usertosend )
+                            val usertosend = UserPerfil(id=1, email = user?.email)
+                            usuarioPostValue( usertosend )
                             ocultar.postValue(false)
+                            esperando_actualizar_usuario = true
+                            con_internet = false
                         }
                     }
                 )
+        }
+    }
+    fun usuarioPostValue(usertosend:UserPerfil){
+        usuario.postValue( usertosend )
+        usuario_interno = usertosend
+        if( App.instance.getString(R.string.cuser_nombre) == usertosend.nombre ){
+            esperando_actualizar_usuario = true
+            con_internet = false
         }
     }
 }

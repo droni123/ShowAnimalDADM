@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController : NavController
     private val startViewModel: StartViewModel by viewModels()
-
+    private var datosdeusuario: UserPerfil = UserPerfil()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         intent.extras?.let { bundle ->
             if (bundle.containsKey(Constantes.KEY_BUNDLE_USER_DATA)) {
                 val usuarioData = bundle.getSerializable(Constantes.KEY_BUNDLE_USER_DATA) as UserPerfil
+                datosdeusuario = usuarioData
                 printDataUser(usuarioData)
             }else{ inicializarConfig() }
         } ?: inicializarConfig()
@@ -99,6 +100,7 @@ class MainActivity : AppCompatActivity() {
     private fun inicializarConfig(){
         startViewModel.usuario.observe(this){ usuarioData->
             if(usuarioData.id != 0){
+                datosdeusuario = usuarioData
                 printDataUser(usuarioData)
             }else{
                 returnToLogin()
@@ -108,15 +110,20 @@ class MainActivity : AppCompatActivity() {
     }
     fun printDataUser(usuarioData:UserPerfil = UserPerfil()){
         if(usuarioData.id != 0) {
-            val spannable =
-                SpannableStringBuilder("${getString(R.string.bienvenido)}:\n${usuarioData.nombre}")
-            spannable.setSpan(StyleSpan(Typeface.BOLD), 13, 16, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
-            spannable.setSpan(
-                StyleSpan(Typeface.BOLD),
-                22,
-                spannable.length,
-                Spannable.SPAN_EXCLUSIVE_INCLUSIVE
-            )
+            var spannable = SpannableStringBuilder("")
+            if(getString(R.string.cuser_nombre) == usuarioData.nombre){
+                spannable = SpannableStringBuilder("${getString(R.string.bienvenido)}")
+                spannable.setSpan(StyleSpan(Typeface.BOLD), 13, 16, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+            }else{
+                spannable = SpannableStringBuilder("${getString(R.string.bienvenido)}:\n${usuarioData.nombre}")
+                spannable.setSpan(StyleSpan(Typeface.BOLD), 13, 16, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+                spannable.setSpan(
+                    StyleSpan(Typeface.BOLD),
+                    22,
+                    spannable.length,
+                    Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                )
+            }
             binding.nombreusuario.text = spannable
             Glide.with(this@MainActivity)
                 .load(usuarioData.imagen)
@@ -124,9 +131,13 @@ class MainActivity : AppCompatActivity() {
                 .centerCrop()
                 .circleCrop()
                 .into(binding.avatar)
+            datosdeusuario = usuarioData
         }else{
             returnToLogin()
         }
+    }
+    fun returnDataUser(): UserPerfil{
+        return datosdeusuario
     }
     fun returnToLogin(){
         startViewModel.cerrarsession()
